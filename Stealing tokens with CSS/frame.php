@@ -7,8 +7,8 @@
 	<!--Inspired by http://eaea.sirdarckcat.net/cssar/v2/-->
 	<h1 style='color:red'>No XFO header plus vulnerable to CSS injection(?style)</h1>
 	<?php
-		if(!file_exists('token.txt')){
-			$handle = fopen('token.txt','w');
+		if(isset($_GET['create'])){
+			$handle = fopen("token.txt",'w');
 			fclose($handle);
 		}
 		if(isset($_GET['token'])){
@@ -16,13 +16,9 @@
 			fwrite($handle, $_GET['token']);
 			fclose($handle);
 		}
-		if(isset($_GET['complete'])){
-			echo "Completed<br>Token<br>".file_get_contents('token.txt')."</b>";
-			die();
 
-		}
 	?>
-	<iframe src="index.php" frameborder=1></iframe>
+	<iframe src="frame.php?create" frameborder=1></iframe>
 	<br>
 	Token::
 	<p id='demo'></p>
